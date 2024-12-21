@@ -8,9 +8,12 @@ import type {
     PublicClient,
     WalletClient,
 } from "viem";
+import { Abi } from "viem";
 import * as viemChains from "viem/chains";
 
-const _SupportedChainList = Object.keys(viemChains) as Array<keyof typeof viemChains>;
+const _SupportedChainList = Object.keys(viemChains) as Array<
+    keyof typeof viemChains
+>;
 export type SupportedChain = (typeof _SupportedChainList)[number];
 
 // Transaction types
@@ -21,6 +24,10 @@ export interface Transaction {
     value: bigint;
     data?: `0x${string}`;
     chainId?: number;
+}
+
+export interface AirdropTransaction extends Transaction {
+    toAddressesUrl: string;
 }
 
 // Token types
@@ -82,6 +89,13 @@ export interface BridgeParams {
     toToken: Address;
     amount: string;
     toAddress?: Address;
+}
+
+export interface AirdropParams {
+    fromChain: SupportedChain;
+    toAddressesUrl: string;
+    amount: string;
+    data?: `0x${string}`;
 }
 
 // Plugin configuration
@@ -159,4 +173,13 @@ export interface TokenListResponse {
 export interface ProviderError extends Error {
     code?: number;
     data?: unknown;
+}
+
+export interface ContractsListItem {
+    address: Address;
+    abi: Abi;
+}
+
+export interface ContractsList {
+    [key: string]: ContractsListItem;
 }
