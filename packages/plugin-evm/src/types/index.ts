@@ -102,6 +102,7 @@ export interface AirdropParams {
 export interface EvmPluginConfig {
     rpcUrl?: {
         ethereum?: string;
+        abstract?: string;
         base?: string;
         sepolia?: string;
         bsc?: string;
@@ -126,6 +127,7 @@ export interface EvmPluginConfig {
         taiko?: string;
         zksync?: string;
         canto?: string;
+        alienx?: string;
     };
     secrets?: {
         EVM_PRIVATE_KEY: string;
